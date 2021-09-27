@@ -1,0 +1,10 @@
+.vscode/
+__pycache__/
+**/report/*.aux
+**/report/*.log
+**/report/*.out
+**/report/*.gz
+**/report/*.blg
+**/report/*.bbl
+**/report/*.fdb_latexmk
+**/report/*.fls
