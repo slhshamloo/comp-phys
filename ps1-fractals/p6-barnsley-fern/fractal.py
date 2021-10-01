@@ -31,7 +31,6 @@ def fractal_random(
         weights: The weight of each mapping in random selection.
             If None is given, the weights of every mapping will be equal.
 
-
     Returns:
         two numpy arrays containing the x and y coordinates
         of the generated fractal's points
