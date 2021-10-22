@@ -2,9 +2,9 @@
 \usepackage{algorithm, algpseudocode, amsmath, amssymb, caption, csquotes, empheq, geometry, graphicx, hyperref, listings, multirow, physics, siunitx, subcaption, upgreek}
 \usepackage[section]{placeins}
 
-\title{Computational Physics\\Problem Set 3}
+\title{Computational Physics\\Problem Set 4}
 \author{Saleh Shamloo Ahmadi\\Student Number: 98100872}
-\date{October 18, 2021}
+\date{October 22, 2021}
 
 \hypersetup{colorlinks=true, urlcolor=cyan}
 \newcommand{\percfig}{../fig/percolation}
@@ -120,7 +120,7 @@
 	sample size.
 	
 	\subsection{Fractal Dimension}
-	The percolation clusters exhibit fractal self-similar behavior. Using a simple breadth-frist search algorithm,
+	The percolation clusters exhibit fractal self-similar behavior. Using a simple depth-frist search algorithm,
 	we can generate clusters in a lattice and calculate their size and radius of gyration to find their
 	fractal dimension; If $s$ is the size of the cluster and $d_f$ is the fractal dimension
 	\begin{equation}
@@ -131,18 +131,45 @@
 		\log{s} = d_f\log{\xi} + C
 	\end{equation}
 	we can calculate the fractal dimension $d_f$.
+	\newgeometry{top=0.5in, bottom=1.5in, left=0in, right=0in}
+	\begin{figure}
+		\centering
+		\begin{subfigure}{0.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{\percfig/fractal-vis-50}
+		\end{subfigure}
+		\begin{subfigure}{0.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{\percfig/fractal-vis-65}
+		\end{subfigure}
+	\end{figure}
+	\restoregeometry
+	\newgeometry{top=1in, bottom=1.5in}
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=\linewidth]{\percfig/fractal-50}
+		\includegraphics[width=\linewidth]{\percfig/fractal-vis-55}
+	\end{figure}
+	\restoregeometry
+	\newgeometry{top=0.3in, bottom=0.3in, left=0in, right=0in}
+	\thispagestyle{empty}
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=0.8\linewidth]{\percfig/fractal-vis-59}
 	\end{figure}
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=\linewidth]{\percfig/fractal-55}
+		\includegraphics[width=0.8\linewidth]{\percfig/fractal-50}
 	\end{figure}
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=\linewidth]{\percfig/fractal-59}
+		\includegraphics[width=0.9\linewidth]{\percfig/fractal-55}
 	\end{figure}
+	\thispagestyle{empty}
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=0.9\linewidth]{\percfig/fractal-59}
+	\end{figure}
+	\restoregeometry
 	\section{Random Walk}
 	\subsection{Variance}
 	We can use the recurrence relation
