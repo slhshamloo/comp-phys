@@ -16,7 +16,7 @@ export randomwalk
 a vector containing the coordinates of each point and a vector counting in how many times
 the walker landed on each point ath the end of the walk (only non-zero points are returned)
 """
-function randomwalk(time::Integer, p::Float64; walks=time)
+function randomwalk1d(time::Integer, p::Float64; walks=time)
     path = zeros(2 * time + 1)
     coordinates = collect(Integer, -time:time)
 
