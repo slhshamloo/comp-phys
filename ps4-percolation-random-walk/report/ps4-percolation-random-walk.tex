@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage{algorithm, algpseudocode, amsmath, amssymb, caption, csquotes, empheq, geometry, graphicx, hyperref, listings, multirow, physics, siunitx, subcaption, upgreek}
+\usepackage{algorithm, algpseudocode, amsmath, amssymb, csquotes, empheq, geometry, graphicx, hyperref, listings, multirow, physics, siunitx, subcaption, upgreek}
 \usepackage[section]{placeins}
+\usepackage[justification=centering]{caption}
 
 \title{Computational Physics\\Problem Set 4}
 \author{Saleh Shamloo Ahmadi\\Student Number: 98100872}
@@ -174,7 +175,7 @@
 		\includegraphics[width=0.9\linewidth]{\percfig/fractal-59}
 	\end{figure}
 	\restoregeometry
-	\section{Random Walk}
+	\section{1D Random Walk}
 	\subsection{Variance}
 	We can use the recurrence relation
 	\begin{equation}
@@ -227,5 +228,23 @@
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{\rwfig/randomwalk-80}
+	\end{figure}
+	\FloatBarrier
+	\subsection{Trapping (Absorbing) Boundary}
+	In the following figures, $L$ is the length of the \enquote{path} i.e. the number of cells in the 1D grid.
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=\linewidth]{\rwfig/randomwalk-trap-sim}
+		\caption{Averaged over 100000 walks}
+	\end{figure}
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=\linewidth]{\rwfig/randomwalk-trap-exp}
+		\caption{Calculated up to $t=100L$ where $t$ is the number of steps}
+	\end{figure}
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=\linewidth]{\rwfig/randomwalk-trap}
+		\caption{As you can see, the expected lifetime is nearly equal to the average lifetime in the simulations}
 	\end{figure}
 \end{document}
