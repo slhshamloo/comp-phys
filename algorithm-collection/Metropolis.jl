@@ -31,7 +31,7 @@ function metropolis(distribution::Function, step::Function, samples::Integer;
         newposition = position + step(position)
         newprobablity = distribution(newposition)
 
-        if rand() <= newprobablity / probability
+        if newprobablity / probability > 1 || rand() <= newprobablity / probability
             position, probability = newposition, newprobablity
             acceptcount += 1
         end
