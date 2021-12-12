@@ -1,0 +1,114 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{algorithm, algpseudocode, amsmath, amssymb, amsthm, csquotes, empheq, geometry, graphicx, hyperref, listings, multirow, siunitx, subcaption, upgreek}
+\usepackage[italicdiff]{physics}
+\usepackage[section]{placeins}
+\usepackage[justification=centering]{caption}
+
+\title{Computational Physics\\Problem Set 9}
+\author{Saleh Shamloo Ahmadi\\Student Number: 98100872}
+\date{December 10, 2021}
+
+\hypersetup{colorlinks=true, urlcolor=cyan}
+\newcommand{\fig}{../fig}
+\newcommand{\fighere}[2]{\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=#2\linewidth]{\fig/#1}
+\end{figure}}
+\newcommand{\multlinecell}[1]{\begin{tabular}[c]{@{}c@{}}#1\end{tabular}}
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+			\hbox{\scriptsize.}\hbox{\scriptsize.}}}
+			=}
+
+\begin{document}
+	\maketitle
+    \section{RC Circuit: First Order Ordinary Differential Equation}
+    In a RC circuit where a battery with voltage $V_0$ is connected to a capacitor and a resistor (kvl)
+    \begin{equation}
+        V_B + V_C + V_R = 0 \implies V_0 - \frac{q}{C} - IR = 0.
+    \end{equation}
+    Here, the current charges the capacitor, so $I = \dot{q}$ and therefore
+    \begin{equation}
+        \dot{q} = \frac{V_0}{R} - \frac{q}{RC}.
+    \end{equation}
+    Defining $q_0 \defeq CV_0$ and assuming $q(0) = 0$
+    \begin{equation}
+        q(t) = q_0(1 - e^{-t/RC}).
+    \end{equation}
+    
+    Here, the Euler method and the classic Runge-Kutta methods are compared against the exact solution.
+
+    Also, in the last figure, it is shown that the method $x_{n+1} = x_{n-1} + 2\Delta{t}\dot{x}(t_n, x_n)$
+    is unstable.
+
+    \newgeometry{top=0.1in, bottom=0.1in}
+    \thispagestyle{empty}
+    \fighere{rc-sol}{0.86}
+    \fighere{rc-error}{1}
+    \fighere{rc-unstable}{0.86}
+    \restoregeometry
+    \section{Simple Harmonic Oscillator:\\Second Order Ordinary Differential Equation}
+    For the simple harmonic oscillator
+    \begin{gather}
+        \ddot{x} = -\omega x, \\
+        \text{for $v(0) = \dot{x}(0) = 0$}
+        \left\{\begin{aligned}
+            x(t) &= x_0\cos(\omega t) \\
+            v(t) &= x_0\omega\sin(\omega t)
+        \end{aligned}\right.
+    \end{gather}
+
+    Here, 6 numerical methods are compared agains the exact solution:
+    \begin{table}[hbt!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            Method & \multlinecell{Local\\Error} & \multlinecell{Global\\Error} & \multlinecell{Global Velocity\\($\dot{x}(t)$) Error} \\
+            \hline
+            Euler Method & $\mathcal{O}(\Delta{t}^2)$ & $\mathcal{O}(\Delta{t})$ & $\mathcal{O}(\Delta{t})$ \\
+            \hline
+            \multlinecell{Euler--Cromer Method\\(a.k.a. Semi-implicit Euler Method)}
+            & $\mathcal{O}(\Delta{t}^2)$ & $\mathcal{O}(\Delta{t})$ & $\mathcal{O}(\Delta{t})$ \\
+            \hline
+            \multlinecell{Midpoint Method\\(A Modified Euler Method)}
+            & $\mathcal{O}(\Delta{t}^3)$ & $\mathcal{O}(\Delta{t}^2)$ & $\mathcal{O}(\Delta{t}^2)$ \\
+            \hline
+            \multlinecell{Verlet Integration\\(a.k.a. St\"{o}rmer--Verlet Method)}
+            & $\mathcal{O}(\Delta{t}^4)$ & $\mathcal{O}(\Delta{t}^2)$ & $\mathcal{O}(\Delta{t})$ \\
+            \hline
+            Velocity Verlet & $\mathcal{O}(\Delta{t}^4)$ & $\mathcal{O}(\Delta{t}^2)$ & $\mathcal{O}(\Delta{t}^2)$ \\
+            \hline
+            Classic Runge--Kutta (a.k.a. RK4)
+            & $\mathcal{O}(\Delta{t}^5)$ & $\mathcal{O}(\Delta{t}^4)$ & $\mathcal{O}(\Delta{t}^4)$ \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    The classic Runge--Kutta method provides the most accurate solution, but it exhibits a severe energy drift in
+    large time intervals (since it is not a sympletic integrator).
+
+    The velocity Verlet method performs the best in terms of conservation of energy. In terms of the displacement
+    accuracy, it performs the same as the midpoint method and the regular verlet method.
+
+    The Euler method can be unstable under certain conditions. Here, one example of this instability is evident.
+    
+    \fighere{sho-sol}{1}
+    \fighere{sho-sol-euler}{1}
+    \newgeometry{top=1in, bottom=1.5in}
+    \fighere{sho-phase}{1}
+    \fighere{sho-phase-euler}{1}
+
+    \section{Logistic Map: Chaos}
+    \fighere{bifurcation}{1}
+    \fighere{bifurcation-zoom}{1}
+    \restoregeometry
+    \begin{empheq}[left={\text{Feigenbaum constants}\empheqlbrace}]{gather*}
+        \text{first constant: } \delta = \frac{a_{n-1} - a_{n-2}}{a_n - a_{n-1}} \approx 4.669 \\
+        \text{second constant: } \alpha = \frac{\text{width of a tine}}{\text{width of the next tine}} \approx 2.509
+    \end{empheq}
+    $\delta$ is calculated with $n=5$ and $\alpha$ is calculated with a branch of a carefully chosen 8 point tine.
+    $\delta$ is accurate up to the third decimal place and $\alpha$ is accurate up to the second decimal place
+    (the error is much larger for $\alpha$, as tine shapes are varied).
+
+    I also made an animation (named \texttt{bifurcation.gif}) showing how the bifurcation diagram changes in each step
+    of applying the logistic map.
+\end{document}
