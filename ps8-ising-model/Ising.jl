@@ -15,7 +15,7 @@ so that the number of elements of `dims` is equal to the dimensionality of the s
 The simulation here utilizes the Metropolis Monte Carlo method. Also, a checkerboard
 coloring pattern is used for flipping many spins at the same time
 """
-mutable struct IsingModel{N} <: Integer
+mutable struct IsingModel{N}
     spins::Array{Int8, N}
     energy::Float64
     magnetization::Float64
