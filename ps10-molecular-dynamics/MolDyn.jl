@@ -5,14 +5,6 @@ export get_temperature, get_potential, get_pressure
 
 using Statistics: mean
 
-macro swap!(a::Symbol, b::Symbol)
-    return quote
-        c = $(esc(a))
-        $(esc(a)) = $(esc(b))
-        $(esc(b)) = c
-    end
-end
-
 """
 A molecular dynamics simulation with periodic boundary conditions in reduced units.
 The Lennard-Jones potential is used with the velocity verlet integration method.
